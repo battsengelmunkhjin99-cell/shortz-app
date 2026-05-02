@@ -10,18 +10,13 @@ export default function Home() {
 
   const generateVideo = async () => {
     setLoading(true);
-    try {
-      const res = await fetch('/api/generate', {
-        method: 'POST',
-        body: JSON.stringify({ name, price, lang }),
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await res.json();
-      if (data.videoUrl) setVideoUrl(data.videoUrl);
-      else alert('Error: ' + data.error);
-    } catch (err) {
-      alert('Network error');
-    }
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      body: JSON.stringify({ name, price, lang }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    setVideoUrl(data.videoUrl);
     setLoading(false);
   };
 
